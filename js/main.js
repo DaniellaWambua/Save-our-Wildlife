@@ -1,8 +1,3 @@
-/**
- * main.js — Save Our Wildlife
- * Handles video toggle: play if not playing, hide if playing.
- * Separation of behaviour: logic lives here, not in HTML.
- */
 
 (function () {
   'use strict';
@@ -12,13 +7,6 @@
   const toggleBtn  = document.getElementById('toggleBtn');
   const btnIcon    = toggleBtn.querySelector('.btn-icon');
   const btnLabel   = toggleBtn.querySelector('.btn-label');
-
-  /**
-   * Possible states:
-   *  - visible + paused  → button says "Play Video"       (initial state)
-   *  - visible + playing → button says "Pause Video"
-   *  - hidden            → button says "Show Video"
-   */
 
   function setButtonState(state) {
     switch (state) {

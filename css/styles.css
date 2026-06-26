@@ -1,33 +1,37 @@
 /* ============================================================
    Save Our Wildlife — Stylesheet
-   Separation of content: styles live here, not in HTML
+   Fonts: Playfair Display (headings) + Lato (body)
+   Theme: earthy savanna — mud, bark, amber, leaf green
    ============================================================ */
 
-/* ---------- 1. Design tokens ---------- */
+/* ---------- 1. Google Fonts import ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap');
+
+/* ---------- 2. Design tokens ---------- */
 :root {
-  --clr-forest:   #1a3a2a;   /* deep forest green — primary bg */
-  --clr-canopy:   #2d5c3f;   /* mid green — header */
-  --clr-moss:     #4a8c5c;   /* accent green */
-  --clr-amber:    #e8a020;   /* warm amber — CTA highlight */
-  --clr-earth:    #f5efe6;   /* off-white — body text bg */
-  --clr-bark:     #3d2b1f;   /* dark brown — footer */
+  --clr-mud:      #3b2a1a;
+  --clr-bark:     #5c3d1e;
+  --clr-savanna:  #c8872a;
+  --clr-grass:    #7a9e3b;
+  --clr-leaf:     #4a7a2b;
+  --clr-mist:     #f5f0e8;
+  --clr-cream:    #fdf8f0;
   --clr-light:    #ffffff;
-  --clr-text:     #1a1a1a;
 
-  --font-display: 'Georgia', 'Times New Roman', serif;
-  --font-body:    system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lato', system-ui, sans-serif;
 
-  --radius-sm:    4px;
-  --radius-md:    8px;
-  --radius-lg:    16px;
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
 
-  --shadow-card:  0 4px 24px rgba(0, 0, 0, 0.18);
-  --transition:   0.25s ease;
+  --shadow-card: 0 4px 20px rgba(30, 18, 8, 0.16);
+  --transition:  0.22s ease;
 
-  --max-width:    860px;
+  --max-width: 860px;
 }
 
-/* ---------- 2. Reset & base ---------- */
+/* ---------- 3. Reset & base ---------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -41,87 +45,73 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--clr-earth);
-  color: var(--clr-text);
+  font-weight: 400;
+  background-color: var(--clr-cream);
+  color: var(--clr-mud);
   line-height: 1.7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* ---------- 3. Accessibility utilities ---------- */
-
-/* Screen-reader only text */
+/* ---------- 4. Accessibility ---------- */
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
 }
 
-/* Visible focus ring for keyboard navigation */
 :focus-visible {
-  outline: 3px solid var(--clr-amber);
+  outline: 3px solid var(--clr-savanna);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
-/* Skip-to-content link (appears on Tab) */
 a.skip-link {
   position: absolute;
-  top: -100%;
-  left: 1rem;
-  background: var(--clr-amber);
-  color: var(--clr-bark);
+  top: -100%; left: 1rem;
+  background: var(--clr-savanna);
+  color: var(--clr-mud);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
   z-index: 9999;
   text-decoration: none;
 }
-a.skip-link:focus {
-  top: 1rem;
-}
+a.skip-link:focus { top: 1rem; }
 
-/* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 }
 
-/* ---------- 4. Header ---------- */
+/* ---------- 5. Header ---------- */
 .site-header {
-  background-color: var(--clr-canopy);
-  color: var(--clr-light);
-  padding: 3rem 1.5rem 2.5rem;
+  background-color: var(--clr-mud);
+  color: var(--clr-cream);
+  padding: 3rem 1.5rem 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-/* Decorative leaf-stripe — the page's signature element */
+/* Warm amber glow from below — like a savanna horizon */
 .site-header::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.03) 40px,
-      rgba(255,255,255,0.03) 80px
-    );
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 120%,
+    rgba(200, 135, 42, 0.25) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -135,49 +125,75 @@ a.skip-link:focus {
 .eyebrow {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--clr-amber);
+  color: var(--clr-savanna);
   margin-bottom: 0.75rem;
 }
 
 .hero-heading {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.75rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--clr-cream);
   letter-spacing: -0.01em;
-  color: var(--clr-light);
   margin-bottom: 0.75rem;
 }
 
-.hero-sub {
-  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-  color: rgba(255,255,255,0.78);
-  max-width: 520px;
-  margin: 0 auto;
+/* Italic amber accent on "Wildlife" */
+.hero-heading em {
+  font-style: italic;
+  color: var(--clr-savanna);
 }
 
-/* ---------- 5. Main content ---------- */
-main {
-  flex: 1;
+.hero-sub {
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: rgba(253, 248, 240, 0.7);
+  max-width: 480px;
+  margin: 0 auto 1.25rem;
+  letter-spacing: 0.02em;
 }
+
+/* Paw-print divider — the page's signature element */
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+.divider-line {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--clr-savanna);
+  opacity: 0.4;
+}
+.divider-paw {
+  font-size: 1.1rem;
+  opacity: 0.75;
+}
+
+/* ---------- 6. Main ---------- */
+main { flex: 1; }
 
 .video-section {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 3rem;
+  padding: 2rem 1.5rem 3rem;
 }
 
-/* ---------- 6. Video ---------- */
+/* ---------- 7. Video ---------- */
 .video-wrapper {
-  background: #000;
+  background: #1a0f06;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  border: 3px solid var(--clr-bark);
   box-shadow: var(--shadow-card);
-  /* Responsive 16:9 aspect ratio */
   aspect-ratio: 16 / 9;
   width: 100%;
   transition: opacity var(--transition), transform var(--transition);
@@ -188,6 +204,7 @@ main {
   pointer-events: none;
   height: 0;
   aspect-ratio: unset;
+  border: none;
 }
 
 .wildlife-video {
@@ -197,7 +214,7 @@ main {
   object-fit: cover;
 }
 
-/* ---------- 7. Toggle button ---------- */
+/* ---------- 8. Toggle button ---------- */
 .video-controls {
   display: flex;
   justify-content: center;
@@ -208,101 +225,123 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background-color: var(--clr-moss);
-  color: var(--clr-light);
+  background-color: var(--clr-leaf);
+  color: var(--clr-cream);
   border: 2px solid transparent;
   border-radius: var(--radius-md);
-  padding: 0.7rem 1.6rem;
+  padding: 0.7rem 1.75rem;
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color var(--transition), transform var(--transition), border-color var(--transition);
+  transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
 }
 
 .toggle-btn:hover {
-  background-color: var(--clr-forest);
-  border-color: var(--clr-amber);
+  background-color: var(--clr-grass);
+  border-color: var(--clr-savanna);
 }
 
 .toggle-btn:active {
   transform: scale(0.97);
 }
 
-/* State: video is playing */
 .toggle-btn[aria-pressed="true"] {
   background-color: var(--clr-bark);
 }
 
-/* State: video is hidden */
 .toggle-btn.state-hidden {
-  background-color: var(--clr-amber);
-  color: var(--clr-bark);
+  background-color: var(--clr-savanna);
+  color: var(--clr-mud);
 }
 
-.btn-icon {
-  font-size: 0.85rem;
-}
-
-/* ---------- 8. Description ---------- */
+/* ---------- 9. Description ---------- */
 .description {
   margin-top: 2rem;
-  padding: 1.5rem 2rem;
-  background: var(--clr-light);
-  border-left: 4px solid var(--clr-moss);
+  padding: 1.5rem 1.75rem;
+  background: var(--clr-mist);
+  border-left: 4px solid var(--clr-savanna);
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(30,18,8,0.07);
 }
 
 .desc-lead {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--clr-forest);
-  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-bark);
+  margin-bottom: 0.65rem;
+  line-height: 1.4;
 }
 
 .desc-body {
+  font-weight: 300;
   font-size: 0.97rem;
-  color: #444;
+  color: #5a4030;
+  line-height: 1.8;
 }
 
-/* ---------- 9. Footer ---------- */
+/* ---------- 10. Stat strip ---------- */
+.stats-strip {
+  display: flex;
+  margin-top: 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(91,61,30,0.15);
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 1.1rem 0.5rem;
+  background: var(--clr-light);
+  border-right: 1px solid rgba(91,61,30,0.12);
+}
+.stat:last-child { border-right: none; }
+
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--clr-savanna);
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #7a6050;
+}
+
+/* ---------- 11. Footer ---------- */
 .site-footer {
-  background-color: var(--clr-bark);
-  color: rgba(255,255,255,0.65);
+  background-color: var(--clr-mud);
+  color: rgba(253,248,240,0.5);
   text-align: center;
   padding: 1.25rem 1rem;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
 }
 
-/* ---------- 10. Responsive breakpoints ---------- */
-
-/* Tablet and below */
+/* ---------- 12. Responsive ---------- */
 @media (max-width: 640px) {
-  .site-header {
-    padding: 2rem 1rem 1.75rem;
-  }
-
-  .video-section {
-    padding: 1.5rem 1rem 2rem;
-  }
-
-  .description {
-    padding: 1.25rem 1.25rem;
-  }
-
-  .toggle-btn {
-    width: 100%;
-    justify-content: center;
-  }
+  .site-header { padding: 2rem 1rem 1.5rem; }
+  .video-section { padding: 1.5rem 1rem 2rem; }
+  .description { padding: 1.25rem; }
+  .toggle-btn { width: 100%; justify-content: center; }
+  .stats-strip { flex-direction: column; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(91,61,30,0.12); }
+  .stat:last-child { border-bottom: none; }
 }
 
-/* High-contrast mode support */
 @media (forced-colors: active) {
-  .toggle-btn {
-    border: 2px solid ButtonText;
-  }
-  .description {
-    border-left: 4px solid CanvasText;
-  }
+  .toggle-btn { border: 2px solid ButtonText; }
+  .description { border-left: 4px solid CanvasText; }
 }
